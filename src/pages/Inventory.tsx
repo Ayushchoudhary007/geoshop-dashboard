@@ -1,12 +1,11 @@
 import React from "react";
+import ProductList from "@/components/inventory/ProductList"
 
-import NewProductForm from "@/components/NewProductForm";
 const Inventory: React.FC = () => {
   return (
-    <div className="flex flex-wrap p-6">
-      <NewProductForm/>
-
-    </div>
+      <div>
+        <ProductList />
+      </div>
   );
 };
 

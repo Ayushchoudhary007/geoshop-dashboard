@@ -3,7 +3,7 @@ import ProductOffers from "@/components/ProductOffers";
 
 const ProductPromotion: React.FC = () => {
   return (
-    <div className="p-6">
+    <div className="p-1">
       <ProductOffers />
     </div>
   );

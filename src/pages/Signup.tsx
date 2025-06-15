@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import GoogleSignInButton from "../components/GoogleSignInButton";
 
-const Register = () => {
+const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,18 +33,22 @@ const Register = () => {
 
       // Navigate to dashboard or home
       navigate("/");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      setError(err.message || "Failed to create account.");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to create account.");
+      }
     }
   };
 
   return (
     <div className="flex flex-wrap gap-6 p-6 bg-[#0f1c3f] min-h-screen w-screen items-center justify-center text-white">
-      <div className="flex min-h-screen w-full items-center justify-center bg-orange-400">
-        <div className="space-y-6  w-full max-w-4xl bg-white p-12 rounded-lg shadow-lg">
+      <div className="h-[90vh] w-full flex items-center justify-center bg-orange-400 px-4 rounded-lg">
+        <div className="w-full max-w-4xl bg-white p-12 rounded-lg shadow-lg">
           <div>
-            <h2 className="text-center text-2xl font-semibold text-gray-900">
+            <h2 className="text-center text-3xl font-semibold text-gray-900">
               Create an account
             </h2>
             <p className="mt-1 text-center text-sm text-gray-600">
@@ -53,7 +57,7 @@ const Register = () => {
           </div>
 
           {error && (
-            <div className="text-red-500 text-sm text-center">{error}</div>
+            <div className="mt-4 text-red-500 text-sm text-center">{error}</div>
           )}
 
           <form onSubmit={handleSignup} className="space-y-4">
@@ -71,7 +75,7 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter your name"
-                className="mt-1 w-full rounded-md border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                className="mt-1 w-full rounded-md border border-gray-700 px-3 py-2 text-sm shadow-sm text-black focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               />
             </div>
 
@@ -89,7 +93,7 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="mt-1 w-full rounded-md border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                className="mt-1 w-full rounded-md border border-gray-700 px-3 py-2 text-sm text-black shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
               />
             </div>
 
@@ -107,7 +111,7 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create a password"
-                className="mt-1 w-full rounded-md border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                className="mt-1 w-full rounded-md border border-gray-700 px-3 py-2 text-sm text-black shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
               />
               <p className="mt-1 text-xs text-gray-500">
                 Must be at least 8 characters.
@@ -116,7 +120,7 @@ const Register = () => {
 
             <button
               type="submit"
-              className="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm text-gray-700 shadow-sm hover:bg-gray-100"
             >
               Get started
             </button>
@@ -127,7 +131,7 @@ const Register = () => {
           <p className="text-center text-sm text-gray-600">
             Already have an account?{" "}
             <Link to="/" className="text-blue-600 hover:underline">
-              Log in
+              Sign In
             </Link>
           </p>
         </div>
@@ -136,4 +140,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Signup;

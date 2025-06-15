@@ -1,31 +1,25 @@
-import React from "react";
-import InventorySummary from "@/components/report/InventorySummary";
-import BestSellingTable from "@/components/report/BestSellingTable";
-import BestSellingCategory from "@/components/report/BestSellingCategory";
-import OverviewMetrics from "@/components/report/OverviewMetrics";
+// pages/Analysis.tsx (same for Home.tsx, Report.tsx, etc.)
+import { useEffect } from "react";
+import { useTemplateStore } from "@/store/templateStore";
+import { templateMap } from "@/constants/templateMap";
 
-const Report: React.FC = () => {
+export default function ReportPage() {
+  const { assignments, fetchTemplatesForUser } = useTemplateStore();
+  const templates = assignments["Report"] || [];
+
+  useEffect(() => {
+    fetchTemplatesForUser(); // call only once
+  }, []);
+
   return (
-    <div className="flex flex-wrap gap-6 p-6 bg-[#0f1c3f] min-h-screen text-white">
-      <h2 className="text-2xl font-bold w-full">Reports Overview</h2>
-
-      <div className="w-full lg:w-1/2 xl:w-1/3">
-        <OverviewMetrics />
-      </div>
-
-      <div className="w-full lg:w-1/2 xl:w-2/3">
-        <BestSellingTable />
-      </div>
-
-      <div className="w-full lg:w-1/2">
-        <BestSellingCategory />
-      </div>
-
-      <div className="w-full lg:w-1/2">
-        <InventorySummary />
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Report Dashboard</h1>
+      <div className="grid lg:grid-cols-2  md:grid-cols-1 gap-12">
+        {templates.map((id) => {
+          const Comp = templateMap[id];
+          return Comp ? <Comp key={id} /> : null;
+        })}
       </div>
     </div>
   );
-};
-
-export default Report;
+}

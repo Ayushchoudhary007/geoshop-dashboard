@@ -169,143 +169,151 @@ export default function BillingForm() {
   };
 
   return (
-    <Card className="bg-background text-foreground max-w-2xl mx-auto mt-8 rounded-2xl shadow-sm">
-      <CardContent className="p-8 space-y-10">
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Payment Methods</h3>
-          <p className="text-sm text-muted-foreground">
-            Select your preferred card.
-          </p>
+    <div className="flex justify-center bg-blue-900 rounded-3xl p-2 m-0.5  max-w-6xl ">
+      <Card className="bg-background text-foreground max-w-5xl mx-auto mt-2 rounded-2xl shadow-sm w-full">
+        <CardContent className="p-8 space-y-10">
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Payment Methods</h3>
+            <p className="text-sm text-muted-foreground">
+              Select your preferred card.
+            </p>
 
-          <RadioGroup
-            value={selectedPayment}
-            onValueChange={setSelectedPayment}
-            className="space-y-4 pt-2"
-          >
-            {paymentOptions.map((card) => (
-              <div
-                key={card.id}
-                className={`flex items-center justify-between p-5 rounded-2xl ${
-                  selectedPayment === card.id
-                    ? "bg-[#1B2A49] border border-blue-500"
-                    : "bg-[#1B2A49]"
-                } transition-all`}
-              >
-                <RadioGroupItem
-                  value={card.id}
-                  id={card.id}
-                  className="h-5 w-5"
+            <RadioGroup
+              value={selectedPayment}
+              onValueChange={setSelectedPayment}
+              className="space-y-4 pt-2"
+            >
+              {paymentOptions.map((card) => (
+                <div
+                  key={card.id}
+                  className={`flex items-center justify-between p-5 rounded-2xl ${
+                    selectedPayment === card.id
+                      ? "bg-[#1B2A49] border border-blue-500"
+                      : "bg-[#1B2A49]"
+                  } transition-all`}
+                >
+                  <RadioGroupItem
+                    value={card.id}
+                    id={card.id}
+                    className="h-5 w-5"
+                  />
+                  <label
+                    htmlFor={card.id}
+                    className="flex flex-col flex-grow pl-4 cursor-pointer"
+                  >
+                    <span className="text-base font-semibold">
+                      {card.label}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      Expires {card.expiry}
+                    </span>
+                  </label>
+                  <button
+                    onClick={() => handleRemoveCard(card.id)}
+                    className="ml-4 text-red-400 text-sm hover:underline"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </RadioGroup>
+
+            <Button
+              variant="secondary"
+              className="w-full mt-2 bg-[#0E1117] text-blue-400 hover:underline hover:bg-[#0E1117]"
+              onClick={() => setShowAddCard(!showAddCard)}
+            >
+              + {showAddCard ? "Cancel" : "Add a new payment method"}
+            </Button>
+
+            {showAddCard && (
+              <div className="mt-4 space-y-4 bg-[#1B2A49] p-4 rounded-xl">
+                <Input
+                  placeholder="Card Number (16 digits)"
+                  value={newCard.number}
+                  onChange={(e) =>
+                    setNewCard({ ...newCard, number: e.target.value })
+                  }
+                  className="bg-[#0e11177e] text-white"
                 />
-                <label
-                  htmlFor={card.id}
-                  className="flex flex-col flex-grow pl-4 cursor-pointer"
+                <Input
+                  placeholder="Expiry Date (MM/YY)"
+                  value={newCard.expiry}
+                  onChange={(e) =>
+                    setNewCard({ ...newCard, expiry: e.target.value })
+                  }
+                  className="bg-[#0e11177e] text-white"
+                />
+                <Button
+                  onClick={handleAddCard}
+                  className="bg-blue-600 hover:bg-blue-700 text-black"
                 >
-                  <span className="text-base font-semibold">{card.label}</span>
-                  <span className="text-sm text-muted-foreground">
-                    Expires {card.expiry}
-                  </span>
-                </label>
-                <button
-                  onClick={() => handleRemoveCard(card.id)}
-                  className="ml-4 text-red-400 text-sm hover:underline"
-                >
-                  Remove
-                </button>
+                  Add Card
+                </Button>
               </div>
-            ))}
-          </RadioGroup>
-
-          <Button
-            variant="secondary"
-            className="w-full mt-2 bg-[#0E1117] text-blue-400 hover:underline hover:bg-[#0E1117]"
-            onClick={() => setShowAddCard(!showAddCard)}
-          >
-            + {showAddCard ? "Cancel" : "Add a new payment method"}
-          </Button>
-
-          {showAddCard && (
-            <div className="mt-4 space-y-4 bg-[#1B2A49] p-4 rounded-xl">
-              <Input
-                placeholder="Card Number (16 digits)"
-                value={newCard.number}
-                onChange={(e) =>
-                  setNewCard({ ...newCard, number: e.target.value })
-                }
-                className="bg-[#0E1117] text-white"
-              />
-              <Input
-                placeholder="Expiry Date (MM/YY)"
-                value={newCard.expiry}
-                onChange={(e) =>
-                  setNewCard({ ...newCard, expiry: e.target.value })
-                }
-                className="bg-[#0E1117] text-white"
-              />
-              <Button
-                onClick={handleAddCard}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                Add Card
-              </Button>
-            </div>
-          )}
-        </div>
-
-        <hr className="border-t border-slate-700" />
-
-        {/* Billing Details */}
-        <div className="space-y-6 pt-2">
-          <h3 className="text-lg font-semibold">Billing Address</h3>
-          <p className="text-sm text-muted-foreground">
-            Please fill in your billing details below.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              placeholder="Full name"
-              name="fullName"
-              value={form.fullName}
-              onChange={handleChange}
-              className="bg-[#0E1117] text-foreground placeholder:text-muted-foreground"
-            />
-            <Input
-              placeholder="Address"
-              name="address"
-              value={form.address}
-              onChange={handleChange}
-              className="bg-[#0E1117] text-foreground placeholder:text-muted-foreground"
-            />
-            <Input
-              placeholder="State"
-              name="state"
-              value={form.state}
-              onChange={handleChange}
-              className="bg-[#0E1117] text-foreground placeholder:text-muted-foreground"
-            />
-            <Input
-              placeholder="Zip code"
-              name="zip"
-              value={form.zip}
-              onChange={handleChange}
-              className="bg-[#0E1117] text-foreground placeholder:text-muted-foreground"
-            />
+            )}
           </div>
-        </div>
 
-        {/* Actions */}
-        <div className="flex justify-end gap-3 pt-6">
-          <Button
-            variant="outline"
-            onClick={handleCancel}
-            className="text-muted-foreground border-slate-700 hover:bg-[#1B2A49]"
-          >
-            Cancel
-          </Button>
-          <Button onClick={handleSave} disabled={loading}>
-            {loading ? "Saving..." : "Save"}
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+          <hr className="border-t border-slate-700" />
+
+          {/* Billing Details */}
+          <div className="space-y-6 pt-2">
+            <h3 className="text-lg font-semibold">Billing Address</h3>
+            <p className="text-sm text-muted-foreground">
+              Please fill in your billing details below.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Input
+                placeholder="Full name"
+                name="fullName"
+                value={form.fullName}
+                onChange={handleChange}
+                className="bg-[#0e1117dc] text-white"
+              />
+              <Input
+                placeholder="Address"
+                name="address"
+                value={form.address}
+                onChange={handleChange}
+                className="bg-[#0e1117dc] text-white"
+              />
+              <Input
+                placeholder="State"
+                name="state"
+                value={form.state}
+                onChange={handleChange}
+                className="bg-[#0e1117dc] text-white"
+              />
+              <Input
+                placeholder="Zip code"
+                name="zip"
+                value={form.zip}
+                onChange={handleChange}
+                className="bg-[#0e1117dc] text-white"
+              />
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex justify-end gap-3 pt-6">
+            <Button
+              variant="outline"
+              onClick={handleCancel}
+              className="text-muted-foreground border-slate-700 hover:bg-[#1B2A49]"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSave}
+              disabled={loading}
+              className="text-muted-foreground border-slate-900 hover:bg-[#1B2A49]"
+            >
+              {loading ? "Saving..." : "Save"}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

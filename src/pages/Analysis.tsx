@@ -1,21 +1,25 @@
-import React from "react";
-import ProductSummaryCards from "@/components/analysis/ProductSummaryCards";
-import ProfitRevenueChart from "@/components/analysis/ProfitRevenueChart";
+// pages/Analysis.tsx (same for Home.tsx, Report.tsx, etc.)
+import { useEffect } from "react";
+import { useTemplateStore } from "@/store/templateStore";
+import { templateMap } from "@/constants/templateMap";
 
-const Analysis: React.FC = () => {
+export default function AnalysisPage() {
+  const { assignments, fetchTemplatesForUser } = useTemplateStore();
+  const templates = assignments["Analysis"] || [];
+
+  useEffect(() => {
+    fetchTemplatesForUser(); // call only once
+  }, []);
+
   return (
-    <div className="flex flex-wrap gap-6 p-6 bg-[#0f1c3f] min-h-screen text-white">
-      <h2 className="text-2xl font-bold w-full">Analytics Dashboard</h2>
-
-      <div className="w-full md:w-1/2 xl:w-1/3">
-        <ProductSummaryCards />
-      </div>
-
-      <div className="w-full md:w-1/2 xl:w-2/3">
-        <ProfitRevenueChart />
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Analysis Dashboard</h1>
+      <div className="grid lg:grid-cols-2  md:grid-cols-1 gap-12">
+        {templates.map((id) => {
+          const Comp = templateMap[id];
+          return Comp ? <Comp key={id} /> : null;
+        })}
       </div>
     </div>
   );
-};
-
-export default Analysis;
+}

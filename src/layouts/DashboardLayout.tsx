@@ -1,11 +1,10 @@
-// src/layouts/DashboardLayout.tsx
-
 import { FC } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { Outlet } from "react-router-dom";
+import { SidebarProvider, useSidebar } from "../context/SidebarContext";
 
-const DashboardLayout: FC = () => {
+const LayoutContent: FC = () => {
   return (
     <div className="flex h-screen w-screen overflow-hidden">
       {/* Sidebar */}
@@ -13,7 +12,7 @@ const DashboardLayout: FC = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         <Topbar />
-        <main className="flex-1 overflow-y-auto bg-gray-800 text-white p-4">
+        <main className="flex-1 overflow-y-auto bg-gray-400 text-white p-0.5">
           <Outlet />
         </main>
       </div>
@@ -21,4 +20,11 @@ const DashboardLayout: FC = () => {
   );
 };
 
+const DashboardLayout: React.FC = () => {
+  return (
+    <SidebarProvider>
+      <LayoutContent />
+    </SidebarProvider>
+  );
+};
 export default DashboardLayout;

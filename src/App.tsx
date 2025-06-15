@@ -7,10 +7,11 @@ import {
 } from "react-router-dom";
 
 import DashboardLayout from "./layouts/DashboardLayout";
+import AppLayout from "./layouts/AppLayout";
 
 // Auth pages
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
 
 // Dashboard pages
 import Home from "./pages/Home";
@@ -57,9 +58,9 @@ const App: React.FC = () => {
       <Routes>
         {!isAuthenticated ? (
           <>
-            <Route path="/Login" element={<Login />} />
-            <Route path="/Register" element={<Register />} />
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="/Signin" element={<Signin />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="*" element={<Navigate to="/Signin" />} />
           </>
         ) : (
           <>
