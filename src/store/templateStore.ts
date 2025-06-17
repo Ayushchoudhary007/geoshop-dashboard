@@ -10,7 +10,7 @@ type TemplateStore = {
   fetchTemplatesForUser: () => void;
 };
 
-export const useTemplateStore = create<TemplateStore>((set, get) => ({
+export const useTemplateStore = create<TemplateStore>((set) => ({
   assignments: {},
 
   setTemplatesForPage: async (page, templates) => {

@@ -2,23 +2,53 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+firebase-debug.log
+firestore-debug.log
 
-node_modules
-dist
-dist-ssr
-*.local
+# Node dependencies
+node_modules/
+functions/node_modules/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Build output (Vite, CRA, etc.)
+dist/
+build/
+
+# Firebase emulators, cache, and local settings
+.firebase/
+.firebaserc.local
+
+# Firebase service account keys (DO NOT COMMIT)
+serviceAccountKey.json
+firebase-adminsdk-*.json
+
+# Cloud Functions build artifacts
+functions/lib/
+functions/.tsbuildinfo
+
+# Environment variables
+.env
+.env.*
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# System files
 .DS_Store
+Thumbs.db
+
+# Editor directories and settings
+.vscode/
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Optional lock files (keep only the one you use)
+# yarn.lock
+# pnpm-lock.yaml
+
+# GitHub workflow logs (optional)
+.github/workflows/*.log

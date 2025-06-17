@@ -4,10 +4,10 @@ import { Label } from "@/components/ui/label";
 
 type Props = {
   avatarUrl?: string;
-  onFileChange: (file: File | null) => void;
+ // onFileChange: (file: File | null) => void;
 };
 
-const AvatarUploader = ({ avatarUrl, onFileChange }: Props) => (
+const AvatarUploader = ({ avatarUrl, /*onFileChange */}: Props) => (
   <div className="col-span-2 flex items-center gap-6">
     {avatarUrl ? (
       <img src={avatarUrl} alt="avatar" className="w-16 h-16 rounded-full" />
@@ -26,7 +26,7 @@ const AvatarUploader = ({ avatarUrl, onFileChange }: Props) => (
         type="file"
         accept="image/*"
         className="mt-2 rounded border border-gray-600"
-        onChange={(e) => onFileChange(e.target.files?.[0] || null)}
+        //onChange={(e) => onFileChange(e.target.files?.[0] || null)}
       />
     </div>
   </div>

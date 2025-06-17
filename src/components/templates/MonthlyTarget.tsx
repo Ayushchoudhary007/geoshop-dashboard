@@ -77,7 +77,8 @@ export default function MonthlyTarget() {
           </div>
           <div className="relative inline-block">
             <button className="dropdown-toggle" onClick={toggleDropdown}>
-              <MoreDotIcon className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 size-6" />
+              <MoreDotIcon /*className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 size-6" */
+              />
             </button>
             <Dropdown
               isOpen={isOpen}

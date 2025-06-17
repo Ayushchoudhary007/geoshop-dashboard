@@ -1,7 +1,7 @@
 // pages/Template.tsx
 import { useTemplateStore } from "@/store/templateStore";
 import { useState } from "react";
-import { templateMap } from "@/constants/templateMap";
+import { templateMap } from "@/data/templateMap";
 
 export default function TemplatePage() {
   const { setTemplatesForPage, assignments } = useTemplateStore();

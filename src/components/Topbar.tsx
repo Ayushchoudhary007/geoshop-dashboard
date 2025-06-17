@@ -3,13 +3,11 @@ import {
   FiSearch,
   FiBell,
   FiChevronDown,
-  FiUser,
-  FiLogOut,
 } from "react-icons/fi";
-import { signOut } from "firebase/auth";
+//import { signOut } from "firebase/auth";
 import { useSidebar } from "../context/SidebarContext";
 import { auth } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 const Topbar: React.FC = () => {
   const { isMobile, closeMobileSidebar } = useSidebar();
@@ -19,7 +17,7 @@ const Topbar: React.FC = () => {
     email: string;
     photoURL: string | null;
   } | null>(null);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -56,14 +54,14 @@ const Topbar: React.FC = () => {
     };
   }, []);
 
-  const handleLogout = async () => {
+  /*const handleLogout = async () => {
     try {
       await signOut(auth);
       navigate("/login");
     } catch (error) {
       console.error("Logout failed:", error);
     }
-  };
+  };*/
 
   return (
     <div className="h-14 bg-[#1C1F23] border-b border-gray-700 px-1 flex items-center justify-between">

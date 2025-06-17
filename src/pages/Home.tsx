@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import { db } from "@/firebase/firebase";
-import { DollarSign, ShoppingCart, Package, Users } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { useEffect } from "react";
+//import { DollarSign, ShoppingCart, Package, Users } from "lucide-react";
+//import { Card, CardContent } from "@/components/ui/card";
 import { useTemplateStore } from "@/store/templateStore";
-import { templateMap } from "@/constants/templateMap";
+import { templateMap } from "@/data/templateMap";
 
 const Home = () => {
   const { assignments, fetchTemplatesForUser } = useTemplateStore();
@@ -13,7 +12,7 @@ const Home = () => {
     fetchTemplatesForUser(); // call only once
   }, []);
 
-  const [summary, setSummary] = useState({
+  /* const [summary, setSummary] = useState({
     totalSales: 0,
     orderCount: 0,
     productCount: 0,
@@ -41,7 +40,7 @@ const Home = () => {
       value: summary.customerCount,
       icon: <Users className="w-6 h-6 text-purple-500" />,
     },
-  ];
+  ];*/
 
   return (
     <div className="flex flex-wrap gap-6 p-6 bg-[#0f1c3f] min-h-screen text-white">
@@ -51,7 +50,7 @@ const Home = () => {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/*<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map(({ title, value, icon }) => (
             <Card key={title} className="bg-gray-700 text-white">
               <CardContent className="flex items-center justify-between p-4">
@@ -63,7 +62,7 @@ const Home = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
+        </div>*/}
       </div>
       {/* Selected Templates */}
       <div className="p-6">
@@ -73,7 +72,7 @@ const Home = () => {
 
         <div className="grid lg:grid-cols-2  md:grid-cols-1 gap-12">
           {templates.map((id) => {
-            const Comp = templateMap[id];
+            const Comp = templateMap[id as keyof typeof templateMap];
             return Comp ? <Comp key={id} /> : null;
           })}
         </div>

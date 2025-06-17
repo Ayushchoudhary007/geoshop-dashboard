@@ -10,7 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
 
 type Offer = {

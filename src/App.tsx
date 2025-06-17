@@ -7,8 +7,6 @@ import {
 } from "react-router-dom";
 
 import DashboardLayout from "./layouts/DashboardLayout";
-import AppLayout from "./layouts/AppLayout";
-
 // Auth pages
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";

@@ -2,7 +2,7 @@ import { FC } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { Outlet } from "react-router-dom";
-import { SidebarProvider, useSidebar } from "../context/SidebarContext";
+import { SidebarProvider } from "../context/SidebarContext";
 
 const LayoutContent: FC = () => {
   return (

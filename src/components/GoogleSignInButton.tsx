@@ -4,7 +4,14 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 
-const GoogleSignInButton = () => {
+// Define prop type
+type GoogleSignInButtonProps = {
+  isSignup?: boolean; // optional prop
+};
+
+const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
+  isSignup,
+}) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +22,6 @@ const GoogleSignInButton = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Store only safe user info
       const userInfo = {
         uid: user.uid,
         displayName: user.displayName,
@@ -24,7 +30,8 @@ const GoogleSignInButton = () => {
       };
       localStorage.setItem("user", JSON.stringify(userInfo));
 
-      navigate("/");
+      // Navigate conditionally if needed
+      navigate(isSignup ? "/welcome" : "/");
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("Google sign-in error:", error.message);
@@ -45,11 +52,11 @@ const GoogleSignInButton = () => {
       }`}
     >
       {loading ? (
-        <span>Signing in...</span>
+        <span>{isSignup ? "Signing up..." : "Signing in..."}</span>
       ) : (
         <>
           <FcGoogle className="text-lg" />
-          Sign in with Google
+          {isSignup ? "Sign up with Google" : "Sign in with Google"}
         </>
       )}
     </button>

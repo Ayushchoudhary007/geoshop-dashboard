@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { templateLibrary } from "../data/templates";
 import { useTemplateStore } from "../store/templateStore";
+import { templateLibrary } from "../data/templates";
+
+interface Template {
+  id: string;
+  name: string;
+}
 
 const TemplateSelector = ({ page }: { page: string }) => {
   const [selected, setSelected] = useState<string[]>([]);
-  const assignTemplate = useTemplateStore((s) => s.assignTemplate);
+  const setTemplatesForPage = useTemplateStore((s) => s.setTemplatesForPage);
 
   const handleChange = (id: string) => {
     setSelected((prev) =>
@@ -12,12 +17,12 @@ const TemplateSelector = ({ page }: { page: string }) => {
     );
   };
 
-  const applyTemplates = () => assignTemplate(page, selected);
+  const applyTemplates = () => setTemplatesForPage(page, selected);
 
   return (
     <div className="p-4 border rounded">
       <h2>Select Components for "{page}"</h2>
-      {templateLibrary.map((tpl) => (
+      {templateLibrary.map((tpl: Template) => (
         <div key={tpl.id}>
           <input
             type="checkbox"

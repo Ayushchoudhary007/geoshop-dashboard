@@ -1,5 +1,11 @@
 {
   "projects": {
     "default": "geo-shop-1d861"
+  },
+  "targets": {},
+  "etags": {
+    "geo-shop-1d861": {
+      "extensionInstances": {}
+    }
   }
 }

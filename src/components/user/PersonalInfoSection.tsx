@@ -10,15 +10,15 @@ type Props = {
   register: UseFormRegister<UserInfo>;
   errors: FieldErrors<UserInfo>;
   avatarUrl?: string;
-  onFileChange: (file: File | null) => void;
+  // onFileChange: (file: File | null) => void;
 };
 
 const PersonalInfoSection = ({
   register,
   errors,
   avatarUrl,
-  onFileChange,
-}: Props) => (
+}: // onFileChange,
+Props) => (
   <section>
     <h2 className="text-lg font-semibold text-white mb-1">
       Personal Information
@@ -57,7 +57,9 @@ const PersonalInfoSection = ({
             )}
           </div>
         </div>
-        <AvatarUploader avatarUrl={avatarUrl} onFileChange={onFileChange} />
+        <AvatarUploader
+          avatarUrl={avatarUrl} /*onFileChange={onFileChange} */
+        />
         <div className="md:col-span-2">
           <Label htmlFor="description">Short description</Label>
           <Textarea
